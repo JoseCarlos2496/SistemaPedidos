@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="SistemaPedidos.API/SistemaPedidos.API.csproj" />
+  <Project Path="SistemaPedidos.Application/SistemaPedidos.Application.csproj" Id="3cc5f0e0-fa5b-4420-94d8-a0c1fb13357b" />
+  <Project Path="SistemaPedidos.Domain/SistemaPedidos.Domain.csproj" Id="6b383a4b-a4ee-4631-b2e8-418215697dff" />
+  <Project Path="SistemaPedidos.Infrastructure/SistemaPedidos.Infrastructure.csproj" Id="31764bfe-bdab-462d-a768-733a98469671" />
+</Solution>
