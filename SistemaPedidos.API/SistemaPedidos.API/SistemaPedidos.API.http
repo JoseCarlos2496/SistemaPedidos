@@ -1,3 +1,159 @@
-@SistemaPedidos.API_HostAddress = http://localhost:5267
+@SistemaPedidos.API_HostAddress = https://localhost:7001
+
+### ========================================
+### Health Check
+### ========================================
+GET {{SistemaPedidos.API_HostAddress}}/api/pedidos/health
 
 ###
+
+### ========================================
+### Registrar Pedido - EXITOSO
+### Cliente válido (1-10) y total dentro del límite
+### ========================================
+POST {{SistemaPedidos.API_HostAddress}}/api/pedidos
+Content-Type: application/json
+
+{
+  "clienteId": 1,
+  "usuario": "usuario.prueba",
+  "items": [
+    { "productoId": 1, "cantidad": 2, "precio": 10.50 },
+    { "productoId": 2, "cantidad": 1, "precio": 20.00 }
+  ]
+}
+
+###
+
+### ========================================
+### Registrar Pedido - EXITOSO (Cliente diferente)
+### ========================================
+POST {{SistemaPedidos.API_HostAddress}}/api/pedidos
+Content-Type: application/json
+
+{
+  "clienteId": 5,
+  "usuario": "juan.perez",
+  "items": [
+    { "productoId": 10, "cantidad": 3, "precio": 45.99 },
+    { "productoId": 11, "cantidad": 2, "precio": 15.50 },
+    { "productoId": 12, "cantidad": 1, "precio": 99.99 }
+  ]
+}
+
+###
+
+### ========================================
+### Registrar Pedido - RECHAZADO
+### Cliente NO existe en JSONPlaceholder (999)
+### ========================================
+POST {{SistemaPedidos.API_HostAddress}}/api/pedidos
+Content-Type: application/json
+
+{
+  "clienteId": 999,
+  "usuario": "usuario.prueba",
+  "items": [
+    { "productoId": 1, "cantidad": 1, "precio": 50.00 }
+  ]
+}
+
+###
+
+### ========================================
+### Registrar Pedido - RECHAZADO
+### Total excede el límite (>10,000)
+### ========================================
+POST {{SistemaPedidos.API_HostAddress}}/api/pedidos
+Content-Type: application/json
+
+{
+  "clienteId": 1,
+  "usuario": "usuario.prueba",
+  "items": [
+    { "productoId": 100, "cantidad": 200, "precio": 100.00 }
+  ]
+}
+
+###
+
+### ========================================
+### Registrar Pedido - ERROR VALIDACIÓN
+### ClienteId inválido (0)
+### ========================================
+POST {{SistemaPedidos.API_HostAddress}}/api/pedidos
+Content-Type: application/json
+
+{
+  "clienteId": 0,
+  "usuario": "usuario.prueba",
+  "items": [
+    { "productoId": 1, "cantidad": 1, "precio": 50.00 }
+  ]
+}
+
+###
+
+### ========================================
+### Registrar Pedido - ERROR VALIDACIÓN
+### Sin items
+### ========================================
+POST {{SistemaPedidos.API_HostAddress}}/api/pedidos
+Content-Type: application/json
+
+{
+  "clienteId": 1,
+  "usuario": "usuario.prueba",
+  "items": []
+}
+
+###
+
+### ========================================
+### Registrar Pedido - ERROR VALIDACIÓN
+### Usuario vacío
+### ========================================
+POST {{SistemaPedidos.API_HostAddress}}/api/pedidos
+Content-Type: application/json
+
+{
+  "clienteId": 1,
+  "usuario": "",
+  "items": [
+    { "productoId": 1, "cantidad": 1, "precio": 50.00 }
+  ]
+}
+
+###
+
+### ========================================
+### Registrar Pedido - ERROR VALIDACIÓN
+### Cantidad negativa
+### ========================================
+POST {{SistemaPedidos.API_HostAddress}}/api/pedidos
+Content-Type: application/json
+
+{
+  "clienteId": 1,
+  "usuario": "usuario.prueba",
+  "items": [
+    { "productoId": 1, "cantidad": -5, "precio": 50.00 }
+  ]
+}
+
+###
+
+### ========================================
+### Registrar Pedido - ERROR VALIDACIÓN
+### Precio negativo
+### ========================================
+POST {{SistemaPedidos.API_HostAddress}}/api/pedidos
+Content-Type: application/json
+
+{
+  "clienteId": 1,
+  "usuario": "usuario.prueba",
+  "items": [
+    { "productoId": 1, "cantidad": 1, "precio": -50.00 }
+  ]
+}

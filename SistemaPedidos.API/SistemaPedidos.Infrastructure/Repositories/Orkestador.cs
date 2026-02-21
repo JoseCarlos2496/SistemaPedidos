@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using SistemaPedidos.Domain.Interfaces;
 using SistemaPedidos.Infrastructure.Data;
@@ -43,7 +44,19 @@ namespace SistemaPedidos.Infrastructure.Repositories
 
         public async Task BeginTransactionAsync(CancellationToken cancellationToken = default)
         {
-            _transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
+            // Verificar si ya hay una transacción activa
+            if (_transaction != null)
+            {
+                throw new InvalidOperationException("Ya existe una transacción activa");
+            }
+
+            // Deshabilitar la estrategia de reintentos para transacciones manuales
+            var strategy = _context.Database.CreateExecutionStrategy();
+
+            await strategy.ExecuteAsync(async () =>
+            {
+                _transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
+            });
         }
 
         public async Task CommitTransactionAsync(CancellationToken cancellationToken = default)
@@ -96,6 +109,24 @@ namespace SistemaPedidos.Infrastructure.Repositories
                 _context.Dispose();
             }
             _disposed = true;
+        }
+
+        /// <summary>
+        /// Ejecuta una operación dentro de una estrategia de reintento
+        /// </summary>
+        public async Task<T> ExecuteInStrategyAsync<T>(Func<Task<T>> operation)
+        {
+            var strategy = _context.Database.CreateExecutionStrategy();
+            return await strategy.ExecuteAsync(operation);
+        }
+
+        /// <summary>
+        /// Ejecuta una operación dentro de una estrategia de reintento (sin retorno)
+        /// </summary>
+        public async Task ExecuteInStrategyAsync(Func<Task> operation)
+        {
+            var strategy = _context.Database.CreateExecutionStrategy();
+            await strategy.ExecuteAsync(operation);
         }
     }
 }

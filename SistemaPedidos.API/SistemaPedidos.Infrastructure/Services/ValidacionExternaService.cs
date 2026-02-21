@@ -219,11 +219,34 @@ namespace SistemaPedidos.Infrastructure.Services
                 
                 return convertedValue;
             }
+            catch (InvalidOperationException)
+            {
+                // Re-lanzar excepciones de configuración faltante
+                throw;
+            }
+            catch (FormatException formatEx)
+            {
+                var errorMessage = $"La configuración '{key}' tiene un formato inválido. " +
+                                  $"No se pudo convertir a tipo {typeof(T).Name}. " +
+                                  $"Valor actual: '{_configuration[key]}'";
+                
+                _logger.LogCritical(formatEx, errorMessage);
+                throw new InvalidOperationException(errorMessage, formatEx);
+            }
+            catch (InvalidCastException castEx)
+            {
+                var errorMessage = $"La configuración '{key}' no se pudo convertir al tipo {typeof(T).Name}. " +
+                                  $"Valor actual: '{_configuration[key]}'";
+                
+                _logger.LogCritical(castEx, errorMessage);
+                throw new InvalidOperationException(errorMessage, castEx);
+            }
             catch (Exception ex)
             {
                 var errorMessage = $"Error inesperado al leer la configuración '{key}': {ex.Message}";
                 
                 _logger.LogCritical(ex, errorMessage);
+                throw new InvalidOperationException(errorMessage, ex);
             }
         }
     }
