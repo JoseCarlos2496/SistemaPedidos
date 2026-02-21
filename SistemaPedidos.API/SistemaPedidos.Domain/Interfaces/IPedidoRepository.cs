@@ -2,9 +2,18 @@ using SistemaPedidos.Domain.Entities;
 
 namespace SistemaPedidos.Domain.Interfaces
 {
-    public interface IPedidoRepository : IRepository<PedidoCabecera>
+    /// <summary>
+    /// Contrato para repositorio de pedidos (PedidoCabecera).
+    /// Define operaciones CRUD sobre entidad PedidoCabecera.
+    /// </summary>
+    public interface IPedidoRepository
     {
-        Task<PedidoCabecera?> ObtenerPedidoConDetallesAsync(int id);
-        Task<IEnumerable<PedidoCabecera>> ObtenerPedidosPorClienteAsync(int clienteId);
+        /// <summary>
+        /// Agrega un nuevo pedido al contexto de Entity Framework.
+        /// No persiste inmediatamente, requiere SaveChanges().
+        /// </summary>
+        /// <param name="pedido">Entidad PedidoCabecera con sus detalles</param>
+        /// <returns>Entidad agregada al contexto (con Id = 0 hasta SaveChanges)</returns>
+        Task<PedidoCabecera> AddAsync(PedidoCabecera pedido);
     }
 }
