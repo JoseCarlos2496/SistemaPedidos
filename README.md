@@ -13,6 +13,7 @@
 ## 📌 Contenido
 
 - [Descripción](#descripción)
+- [Instalación](#instalación)
 - [Estructura del Proyecto](#estructura-del-proyecto)
 - [Arquitectura y Referencias](#arquitectura-y-referencias)
 - [Tecnologías y Librerías](#tecnologías-y-librerías)
@@ -22,6 +23,52 @@
 
 ---
 
+## Instalación
+
+### Requisitos Previos
+
+- .NET SDK 8.0 o superior
+- SQL Server o LocalDB (`(localdb)\\mssqllocaldb`)
+- SQL Server Management Studio (opcional, para ejecutar scripts)
+
+### Pasos
+
+1. Clonar el repositorio:
+
+```bash
+git clone <URL_DEL_REPOSITORIO>
+cd SistemaPedidos
+```
+
+2. Ir a la solución:
+
+```bash
+cd .\SistemaPedidos.API
+```
+
+3. Restaurar y compilar:
+
+```bash
+dotnet restore .\SistemaPedidos.API.slnx
+dotnet build .\SistemaPedidos.API.slnx -c Release
+```
+
+4. Crear base de datos ejecutando los scripts de la carpeta `SQL`:
+
+- `SQL/Script_Creacion_Login_User_BDD.sql`
+- `SQL/Script_Creacion_BDD_Estructuras.sql`
+
+5. Verificar la cadena de conexión en `SistemaPedidos.API/appsettings.json` (por defecto usa LocalDB).
+
+6. Ejecutar la API:
+
+```bash
+dotnet run --project .\SistemaPedidos.API\SistemaPedidos.API.csproj
+```
+
+7. Abrir Swagger en:
+
+- `https://localhost:7169/` 
 ## Descripción
 
 **SistemaPedidos** es una API REST desarrollada en **.NET 8** que implementa un sistema transaccional robusto para el registro de pedidos.

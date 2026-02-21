@@ -1,0 +1,32 @@
+SISTEMAPEDIDOS - PASOS DE INSTALACIÓN
+
+Requisitos previos:
+- .NET SDK 8.0 o superior
+- SQL Server o LocalDB ((localdb)\mssqllocaldb)
+- SQL Server Management Studio (opcional)
+
+1) Clonar repositorio
+git clone <URL_DEL_REPOSITORIO>
+cd SistemaPedidos
+
+2) Ir a la solución
+cd .\SistemaPedidos.API
+
+3) Restaurar y compilar
+dotnet restore .\SistemaPedidos.API.slnx
+dotnet build .\SistemaPedidos.API.slnx -c Release
+
+4) Crear base de datos ejecutando scripts SQL
+- SQL/Script_Creacion_Login_User_BDD.sql
+- SQL/Script_Creacion_BDD_Estructuras.sql
+
+5) Verificar cadena de conexión
+Archivo:
+SistemaPedidos.API/appsettings.json
+(usa LocalDB por defecto)
+
+6) Ejecutar la API
+dotnet run --project .\SistemaPedidos.API\SistemaPedidos.API.csproj
+
+7) Abrir Swagger
+https://localhost:7169/
