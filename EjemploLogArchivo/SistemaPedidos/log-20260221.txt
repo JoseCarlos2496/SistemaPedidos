@@ -1,0 +1,168 @@
+2026-02-21 01:19:10.257 -05:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-02-21 01:19:11.101 -05:00 [FTL] Error CRÍTICO no controlado: ArgumentOutOfRangeException
+System.ArgumentOutOfRangeException: value ('00:00:00') must be greater than '00:00:00'. (Parameter 'value')
+Actual value was 00:00:00.
+   at System.ArgumentOutOfRangeException.ThrowLessEqual[T](T value, T other, String paramName)
+   at System.ArgumentOutOfRangeException.ThrowIfLessThanOrEqual[T](T value, T other, String paramName)
+   at System.Net.Http.HttpClient.set_Timeout(TimeSpan value)
+   at Program.<>c__DisplayClass0_0.<<Main>$>b__2(HttpClient client) in D:\Proyecto\SistemaPedidos\SistemaPedidos.API\SistemaPedidos.API\Program.cs:line 59
+   at Microsoft.Extensions.Http.DefaultHttpClientFactory.CreateClient(String name)
+   at SistemaPedidos.Infrastructure.Services.ValidacionExternaService.ValidarClienteExternoAsync(Int32 clienteId) in D:\Proyecto\SistemaPedidos\SistemaPedidos.API\SistemaPedidos.Infrastructure\Services\ValidacionExternaService.cs:line 145
+   at SistemaPedidos.Infrastructure.Services.ValidacionExternaService.ValidarPedidoAsync(Int32 clienteId, Decimal total) in D:\Proyecto\SistemaPedidos\SistemaPedidos.API\SistemaPedidos.Infrastructure\Services\ValidacionExternaService.cs:line 80
+   at SistemaPedidos.Application.Services.PedidoService.<>c__DisplayClass4_0.<<RegistrarPedidoAsync>b__0>d.MoveNext() in D:\Proyecto\SistemaPedidos\SistemaPedidos.API\SistemaPedidos.Application\Services\PedidoService.cs:line 82
+--- End of stack trace from previous location ---
+   at SistemaPedidos.Application.Services.PedidoService.<>c__DisplayClass4_0.<<RegistrarPedidoAsync>b__0>d.MoveNext() in D:\Proyecto\SistemaPedidos\SistemaPedidos.API\SistemaPedidos.Application\Services\PedidoService.cs:line 109
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at SistemaPedidos.Infrastructure.Repositories.Orkestador.ExecuteInStrategyAsync[T](Func`1 operation) in D:\Proyecto\SistemaPedidos\SistemaPedidos.API\SistemaPedidos.Infrastructure\Repositories\Orkestador.cs:line 163
+   at SistemaPedidos.Application.Services.PedidoService.RegistrarPedidoAsync(PedidoRequest request, CancellationToken cancellationToken) in D:\Proyecto\SistemaPedidos\SistemaPedidos.API\SistemaPedidos.Application\Services\PedidoService.cs:line 61
+   at SistemaPedidos.API.Controllers.PedidosController.RegistrarPedido(PedidoRequest request, CancellationToken cancellationToken) in D:\Proyecto\SistemaPedidos\SistemaPedidos.API\SistemaPedidos.API\Controllers\PedidosController.cs:line 115
+   at lambda_method5(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at SistemaPedidos.API.Middleware.GlobalExceptionHandlerMiddleware.InvokeAsync(HttpContext context) in D:\Proyecto\SistemaPedidos\SistemaPedidos.API\SistemaPedidos.API\Middleware\GlobalExceptionHandlerMiddleware.cs:line 77
+2026-02-21 01:23:08.861 -05:00 [INF] Iniciando aplicación SistemaPedidos
+2026-02-21 01:23:09.754 -05:00 [INF] Aplicación configurada exitosamente
+2026-02-21 01:23:28.621 -05:00 [INF] Configuración 'ValidacionExterna:BaseUrl' cargada exitosamente: https://jsonplaceholder.typicode.com
+2026-02-21 01:23:28.626 -05:00 [INF] Configuración 'ValidacionExterna:LimiteTotal' cargada exitosamente: 100
+2026-02-21 01:23:28.630 -05:00 [INF] Configuración 'ValidacionExterna:TimeoutSeconds' cargada exitosamente: 10
+2026-02-21 01:23:28.631 -05:00 [INF] ValidacionExternaService inicializado - BaseUrl: https://jsonplaceholder.typicode.com, Timeout: 10s, Límite: ¤100.00
+2026-02-21 01:23:28.672 -05:00 [INF] === REQUEST RECIBIDO === Cliente: 9, Usuario: usuario.prueba.9
+2026-02-21 01:23:29.256 -05:00 [INF] === INICIO REGISTRO PEDIDO === Cliente: 9, Usuario: usuario.prueba.9, Items: 2
+2026-02-21 01:23:29.714 -05:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-02-21 01:23:29.819 -05:00 [INF] Total calculado: ¤51.00 (2 items)
+2026-02-21 01:23:29.820 -05:00 [INF] Iniciando validación de pedido - Cliente: 9, Total: ¤51.00
+2026-02-21 01:23:29.825 -05:00 [INF] Consultando servicio externo para cliente 9 en https://jsonplaceholder.typicode.com
+2026-02-21 01:23:29.836 -05:00 [INF] Start processing HTTP request GET https://jsonplaceholder.typicode.com/users/9
+2026-02-21 01:23:29.838 -05:00 [INF] Sending HTTP request GET https://jsonplaceholder.typicode.com/users/9
+2026-02-21 01:23:30.025 -05:00 [INF] Received HTTP response headers after 184.6564ms - 200
+2026-02-21 01:23:30.026 -05:00 [INF] End processing HTTP request after 194.3624ms - 200
+2026-02-21 01:23:30.051 -05:00 [INF] Cliente validado exitosamente - Id: 9, Nombre: Glenna Reichert, Email: Chaim_McDermott@dana.io
+2026-02-21 01:23:30.051 -05:00 [INF] Pedido validado exitosamente - Cliente: 9, Total: ¤51.00
+2026-02-21 01:23:30.053 -05:00 [INF] Creando entidad de pedido...
+2026-02-21 01:23:30.111 -05:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-02-21 01:23:30.142 -05:00 [INF] Pedido guardado exitosamente - Id: 10, Items: 2
+2026-02-21 01:23:30.143 -05:00 [WRN] Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-02-21 01:23:30.169 -05:00 [INF] === PEDIDO EXITOSO === PedidoId: 10, Total: ¤51.00
+2026-02-21 01:23:30.172 -05:00 [INF] === PEDIDO CREADO === PedidoId: 10, Total: ¤51.00
+2026-02-21 01:30:11.670 -05:00 [INF] 
+Iniciando aplicación SistemaPedidos
+2026-02-21 01:30:12.442 -05:00 [INF] 
+Aplicación configurada exitosamente
+2026-02-21 01:30:54.706 -05:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics
+Request starting HTTP/2 POST https://localhost:7169/api/Pedidos - application/json 192
+2026-02-21 01:30:55.438 -05:00 [INF] SistemaPedidos.Infrastructure.Services.ValidacionExternaService
+Configuración 'ValidacionExterna:BaseUrl' cargada exitosamente: https://jsonplaceholder.typicode.com
+2026-02-21 01:30:55.442 -05:00 [INF] SistemaPedidos.Infrastructure.Services.ValidacionExternaService
+Configuración 'ValidacionExterna:LimiteTotal' cargada exitosamente: 100
+2026-02-21 01:30:55.444 -05:00 [INF] SistemaPedidos.Infrastructure.Services.ValidacionExternaService
+Configuración 'ValidacionExterna:TimeoutSeconds' cargada exitosamente: 10
+2026-02-21 01:30:55.446 -05:00 [INF] SistemaPedidos.Infrastructure.Services.ValidacionExternaService
+ValidacionExternaService inicializado - BaseUrl: https://jsonplaceholder.typicode.com, Timeout: 10s, Límite: ¤100.00
+2026-02-21 01:30:55.540 -05:00 [INF] SistemaPedidos.API.Controllers.PedidosController
+=== REQUEST RECIBIDO === Cliente: 8, Usuario: usuario.prueba.8
+2026-02-21 01:30:56.437 -05:00 [INF] SistemaPedidos.Application.Services.PedidoService
+=== INICIO REGISTRO PEDIDO === Cliente: 8, Usuario: usuario.prueba.8, Items: 2
+2026-02-21 01:30:57.335 -05:00 [WRN] Microsoft.EntityFrameworkCore.Database.Transaction
+Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-02-21 01:30:57.465 -05:00 [INF] SistemaPedidos.Application.Services.PedidoService
+Total calculado: ¤179.00 (2 items)
+2026-02-21 01:30:57.466 -05:00 [INF] SistemaPedidos.Infrastructure.Services.ValidacionExternaService
+Iniciando validación de pedido - Cliente: 8, Total: ¤179.00
+2026-02-21 01:30:57.467 -05:00 [WRN] SistemaPedidos.Infrastructure.Services.ValidacionExternaService
+Total ¤179.00 excede el límite permitido de ¤100.00
+2026-02-21 01:30:58.036 -05:00 [WRN] SistemaPedidos.API.Middleware.GlobalExceptionHandlerMiddleware
+Regla de negocio violada: LIMITE_TOTAL_EXCEDIDO
+SistemaPedidos.Domain.Exceptions.BusinessRuleException: El total del pedido (179,00 €) excede el límite máximo permitido (100,00 €)
+   at SistemaPedidos.Infrastructure.Services.ValidacionExternaService.ValidarReglasNegocio(Int32 clienteId, Decimal total) in D:\Proyecto\SistemaPedidos\SistemaPedidos.API\SistemaPedidos.Infrastructure\Services\ValidacionExternaService.cs:line 135
+   at SistemaPedidos.Infrastructure.Services.ValidacionExternaService.ValidarPedidoAsync(Int32 clienteId, Decimal total) in D:\Proyecto\SistemaPedidos\SistemaPedidos.API\SistemaPedidos.Infrastructure\Services\ValidacionExternaService.cs:line 77
+   at SistemaPedidos.Application.Services.PedidoService.<>c__DisplayClass4_0.<<RegistrarPedidoAsync>b__0>d.MoveNext() in D:\Proyecto\SistemaPedidos\SistemaPedidos.API\SistemaPedidos.Application\Services\PedidoService.cs:line 82
+--- End of stack trace from previous location ---
+   at SistemaPedidos.Application.Services.PedidoService.<>c__DisplayClass4_0.<<RegistrarPedidoAsync>b__0>d.MoveNext() in D:\Proyecto\SistemaPedidos\SistemaPedidos.API\SistemaPedidos.Application\Services\PedidoService.cs:line 109
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at SistemaPedidos.Infrastructure.Repositories.Orkestador.ExecuteInStrategyAsync[T](Func`1 operation) in D:\Proyecto\SistemaPedidos\SistemaPedidos.API\SistemaPedidos.Infrastructure\Repositories\Orkestador.cs:line 163
+   at SistemaPedidos.Application.Services.PedidoService.RegistrarPedidoAsync(PedidoRequest request, CancellationToken cancellationToken) in D:\Proyecto\SistemaPedidos\SistemaPedidos.API\SistemaPedidos.Application\Services\PedidoService.cs:line 61
+   at SistemaPedidos.API.Controllers.PedidosController.RegistrarPedido(PedidoRequest request, CancellationToken cancellationToken) in D:\Proyecto\SistemaPedidos\SistemaPedidos.API\SistemaPedidos.API\Controllers\PedidosController.cs:line 115
+   at lambda_method5(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at SistemaPedidos.API.Middleware.GlobalExceptionHandlerMiddleware.InvokeAsync(HttpContext context) in D:\Proyecto\SistemaPedidos\SistemaPedidos.API\SistemaPedidos.API\Middleware\GlobalExceptionHandlerMiddleware.cs:line 77
+2026-02-21 01:30:58.096 -05:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics
+Request finished HTTP/2 POST https://localhost:7169/api/Pedidos - 400 null application/json 3400.1577ms
+2026-02-21 01:39:37.928 -05:00 [INF] 
+Iniciando aplicación SistemaPedidos
+2026-02-21 01:39:38.308 -05:00 [INF] 
+Aplicación configurada exitosamente
+2026-02-21 01:39:44.750 -05:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics
+Request starting HTTP/2 POST https://localhost:7169/api/Pedidos - application/json 192
+2026-02-21 01:39:44.993 -05:00 [INF] SistemaPedidos.Infrastructure.Services.ValidacionExternaService
+Configuración 'ValidacionExterna:BaseUrl' cargada exitosamente: https://jsonplaceholder.typicode.com
+2026-02-21 01:39:44.996 -05:00 [INF] SistemaPedidos.Infrastructure.Services.ValidacionExternaService
+Configuración 'ValidacionExterna:LimiteTotal' cargada exitosamente: 100000
+2026-02-21 01:39:44.998 -05:00 [INF] SistemaPedidos.Infrastructure.Services.ValidacionExternaService
+Configuración 'ValidacionExterna:TimeoutSeconds' cargada exitosamente: 10
+2026-02-21 01:39:44.998 -05:00 [INF] SistemaPedidos.Infrastructure.Services.ValidacionExternaService
+ValidacionExternaService inicializado - BaseUrl: https://jsonplaceholder.typicode.com, Timeout: 10s, Límite: $100000
+2026-02-21 01:39:45.050 -05:00 [INF] SistemaPedidos.API.Controllers.PedidosController
+=== REQUEST RECIBIDO === Cliente: 8, Usuario: usuario.prueba.8
+2026-02-21 01:39:45.699 -05:00 [INF] SistemaPedidos.Application.Services.PedidoService
+=== INICIO REGISTRO PEDIDO === Cliente: 8, Usuario: usuario.prueba.8, Items: 2
+2026-02-21 01:39:46.250 -05:00 [WRN] Microsoft.EntityFrameworkCore.Database.Transaction
+Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-02-21 01:39:46.392 -05:00 [INF] SistemaPedidos.Application.Services.PedidoService
+Total calculado: $179 (2 items)
+2026-02-21 01:39:46.393 -05:00 [INF] SistemaPedidos.Infrastructure.Services.ValidacionExternaService
+Iniciando validación de pedido - Cliente: 8, Total: $179
+2026-02-21 01:39:46.404 -05:00 [INF] SistemaPedidos.Infrastructure.Services.ValidacionExternaService
+Consultando servicio externo para cliente 8 en https://jsonplaceholder.typicode.com
+2026-02-21 01:39:46.412 -05:00 [INF] System.Net.Http.HttpClient.JSONPlaceholder.LogicalHandler
+Start processing HTTP request GET https://jsonplaceholder.typicode.com/users/8
+2026-02-21 01:39:46.413 -05:00 [INF] System.Net.Http.HttpClient.JSONPlaceholder.ClientHandler
+Sending HTTP request GET https://jsonplaceholder.typicode.com/users/8
+2026-02-21 01:39:47.246 -05:00 [INF] System.Net.Http.HttpClient.JSONPlaceholder.ClientHandler
+Received HTTP response headers after 829.7224ms - 200
+2026-02-21 01:39:47.383 -05:00 [INF] System.Net.Http.HttpClient.JSONPlaceholder.LogicalHandler
+End processing HTTP request after 973.9616ms - 200
+2026-02-21 01:39:47.409 -05:00 [INF] SistemaPedidos.Infrastructure.Services.ValidacionExternaService
+Cliente validado exitosamente - Id: 8, Nombre: Nicholas Runolfsdottir V, Email: Sherwood@rosamond.me
+2026-02-21 01:39:47.410 -05:00 [INF] SistemaPedidos.Infrastructure.Services.ValidacionExternaService
+Pedido validado exitosamente - Cliente: 8, Total: $179
+2026-02-21 01:39:47.412 -05:00 [INF] SistemaPedidos.Application.Services.PedidoService
+Creando entidad de pedido...
+2026-02-21 01:39:47.469 -05:00 [WRN] Microsoft.EntityFrameworkCore.Database.Transaction
+Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-02-21 01:39:47.500 -05:00 [INF] SistemaPedidos.Application.Services.PedidoService
+Pedido guardado exitosamente - Id: 11, Items: 2
+2026-02-21 01:39:47.501 -05:00 [WRN] Microsoft.EntityFrameworkCore.Database.Transaction
+Savepoints are disabled because Multiple Active Result Sets (MARS) is enabled. If 'SaveChanges' fails, then the transaction cannot be automatically rolled back to a known clean state. Instead, the transaction should be rolled back by the application before retrying 'SaveChanges'. See https://go.microsoft.com/fwlink/?linkid=2149338 for more information and examples. To identify the code which triggers this warning, call 'ConfigureWarnings(w => w.Throw(SqlServerEventId.SavepointsDisabledBecauseOfMARS))'.
+2026-02-21 01:39:47.524 -05:00 [INF] SistemaPedidos.Application.Services.PedidoService
+=== PEDIDO EXITOSO === PedidoId: 11, Total: $179
+2026-02-21 01:39:47.527 -05:00 [INF] SistemaPedidos.API.Controllers.PedidosController
+=== PEDIDO CREADO === PedidoId: 11, Total: $179
+2026-02-21 01:39:47.571 -05:00 [INF] Microsoft.AspNetCore.Hosting.Diagnostics
+Request finished HTTP/2 POST https://localhost:7169/api/Pedidos - 201 null application/json; charset=utf-8 2826.2832ms
